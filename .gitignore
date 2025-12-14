@@ -1,0 +1,11 @@
+# Node dependencies
+node_modules/
+FRONTEND/**/node_modules/
+BACKEND/node_modules/
+
+# Environment variables
+.env
+
+# Build folders
+dist/
+build/
