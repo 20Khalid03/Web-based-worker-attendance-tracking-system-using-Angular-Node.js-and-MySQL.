@@ -1,0 +1,52 @@
+<div class="dashboard">
+  <header class="header">
+    <img src="assets/agri_logo.png" alt="Logo" class="logo">
+    <div class="user-menu">
+      <button class="icon-button"><i class="fas fa-envelope"></i></button>
+      <div class="user-profile" (click)="toggleDropdown($event)">
+        <img *ngIf="ouvrierInfo?.photo" [src]="getImageUrl(ouvrierInfo.photo)" alt="Photo" class="user-photo">
+        <div class="dropdown" [class.active]="dropdownVisible">
+          <a (click)="goToSettings()">Paramètres</a>
+          <a (click)="logout()">Déconnexion</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1 class="welcome">Bienvenue, {{ userName }} 👋</h1>
+
+    <div class="dashboard-grid">
+      <section class="card info-card">
+        <h2>Informations</h2>
+        <p><strong>Nom:</strong> {{ ouvrierInfo?.Last_Name }}</p>
+        <p><strong>Prénom:</strong> {{ ouvrierInfo?.First_Name }}</p>
+      </section>
+
+      <section class="card absences-card">
+        <h2>Absences</h2>
+        <p class="big-number">{{ absences?.nombre_absences }}</p>
+      </section>
+
+      <section class="card hours-card">
+        <h2>Heures travaillées</h2>
+        <p class="big-number">{{ heuresTravaillees?.totalHoursWorked }}</p>
+      </section>
+
+      <section class="card chart-card">
+        <h2>Heures par jour</h2>
+        <canvas #columnChart></canvas>
+      </section>
+
+      <section class="card timesheet-card">
+        <h2>Pointages récents</h2>
+        <ul class="timesheet-list">
+          <li *ngFor="let pointage of heuresTravaillees?.details.slice(0, 5)">
+            <span>{{ pointage.entree | date:'shortDate' }}</span>
+            <span>{{ pointage.hoursWorked }} h</span>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</div>

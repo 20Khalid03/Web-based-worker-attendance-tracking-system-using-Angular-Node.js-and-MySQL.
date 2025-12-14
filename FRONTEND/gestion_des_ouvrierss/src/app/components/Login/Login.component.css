@@ -1,0 +1,83 @@
+.login-container {
+    background-image: url('../../../assets/bg9.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%; /* Ensure it spans the full width */
+    position:absolute; /* Fix it at the top of the page */
+    top: 0;
+    left: 0;}
+  
+    .login-card {
+      background-color: #fff;
+      backdrop-filter: blur(10px); 
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo img {
+      max-width: 150px;
+      height: auto;
+    }
+    
+    .form-control {
+      background-color: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-success {
+      background-color: #4CAF50; 
+      border: none;
+    }
+    
+    a {
+      color: #2E7D32;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    
+    .card-body, .card-footer {
+      color: #333;
+    }
+    
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.form-label, .form-control, .btn-success, a {
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.form-label { animation-delay: 0.2s; }
+.form-control { animation-delay: 0.4s; }
+.btn-success { animation-delay: 0.6s; }
+a { animation-delay: 0.8s; }
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .login-card {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .form-control, .btn-success {
+    font-size: 0.9rem;
+  }
+
+  .logo img {
+    max-width: 100px;
+  }
+}

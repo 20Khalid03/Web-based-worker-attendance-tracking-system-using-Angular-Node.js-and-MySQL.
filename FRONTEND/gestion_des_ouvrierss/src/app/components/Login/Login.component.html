@@ -1,0 +1,31 @@
+<div class="container-fluid login-container">
+  <div class="row vh-100 justify-content-center align-items-center">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card login-card shadow">
+        <div class="card-header bg-transparent text-center">
+          <div class="logo">
+            <img src="assets/agri_logo.png" alt="AgriData Consulting" class="img-fluid mt-3">
+          </div>
+        </div>
+        <div class="card-body">
+          <h2 class="text-center mb-4">Connexion</h2>
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="mb-3">
+              <label for="login" class="form-label">Nom d'utilisateur ou Email</label>
+              <input type="text" id="login" class="form-control" formControlName="login" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Mot de passe</label>
+              <input type="password" id="password" class="form-control" formControlName="password" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100" [disabled]="!loginForm.valid">Connexion</button>
+          </form>
+          <a href="#" class="d-block mt-3 text-center">Mot de passe oublié ?</a>
+        </div>
+        <div class="card-footer bg-transparent border-0 text-center">
+          <p class="mb-0">© 2024 AgriData Consulting</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

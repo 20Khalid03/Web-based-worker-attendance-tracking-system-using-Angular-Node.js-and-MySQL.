@@ -1,0 +1,89 @@
+<div class="container mt-5" *ngIf="utilisateur">
+  <h2 class="mb-4 text-center">Profil de l'utilisateur</h2>
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center">
+          <img [src]="'assets/33.png'" alt="Photo de profil" class="img-thumbnail rounded-circle profile-img">
+        </div>
+        <div class="col-md-8">
+          <h3 class="user-name">{{ utilisateur.First_Name }} {{ utilisateur.Last_Name }}</h3>
+          <p><strong>Email:</strong> {{ utilisateur.E_mail }}</p>
+          <p><strong>Login:</strong> {{ utilisateur.login }}</p>
+        </div>
+      </div>
+      <div class="text-end mt-4">
+        <button class="btn btn-primary" (click)="isEditing = true">
+          <i class="fas fa-pencil-alt"></i> Modifier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-settings card mt-4 shadow-sm" *ngIf="isEditing">
+    <div class="card-header text-center bg-light">
+      <h2>Modifier les paramètres</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="First_Name">Prénom</label>
+            <input type="text" id="First_Name" formControlName="First_Name" class="form-control">
+            <div *ngIf="settingsForm.get('First_Name')?.invalid && settingsForm.get('First_Name')?.touched" class="text-danger">
+              Le prénom est requis.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="Last_Name">Nom</label>
+            <input type="text" id="Last_Name" formControlName="Last_Name" class="form-control">
+            <div *ngIf="settingsForm.get('Last_Name')?.invalid && settingsForm.get('Last_Name')?.touched" class="text-danger">
+              Le nom est requis.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="E_mail">Email</label>
+            <input type="email" id="E_mail" formControlName="E_mail" class="form-control">
+            <div *ngIf="settingsForm.get('E_mail')?.invalid && settingsForm.get('E_mail')?.touched" class="text-danger">
+              Veuillez entrer une adresse email valide.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="login">Login</label>
+            <input type="text" id="login" formControlName="login" class="form-control">
+            <div *ngIf="settingsForm.get('login')?.invalid && settingsForm.get('login')?.touched" class="text-danger">
+              Le login est requis.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="newPassword">Nouveau mot de passe</label>
+            <input type="password" id="newPassword" formControlName="newPassword" class="form-control">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="confirmPassword">Confirmer le mot de passe</label>
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control">
+            <div *ngIf="passwordMismatch" class="text-danger">
+              Les mots de passe ne correspondent pas
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button type="submit" [disabled]="!settingsForm.valid" class="btn btn-success me-2">
+            <i class="fas fa-save"></i> Mettre à jour
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="cancelEditing()">
+            <i class="fas fa-times"></i> Annuler
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+  </div>
+
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    <i class="fas fa-check-circle"></i> {{ successMessage }}
+  </div>
+</div>

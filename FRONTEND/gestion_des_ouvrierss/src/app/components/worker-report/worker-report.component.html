@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="assets/agri_logo.png" alt="Logo" class="img-fluid logo">
+    </a>
+    <div class="d-flex align-items-center">
+      <a href="#" class="text-decoration-none me-3">
+        <i class="fas fa-envelope fa-lg"></i>
+      </a>
+      <span class="me-2 welcome-emoji">👋</span>
+      <span class="navbar-text welcome-text">Welcome, {{ userName }}!</span>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Worker Report</h2>
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-success me-2" (click)="exportToExcel()">
+      <i class="fas fa-file-excel me-2"></i>Export to Excel
+    </button>
+    <button class="btn btn-danger" (click)="exportToPDF()">
+      <i class="fas fa-file-pdf me-2"></i>Export to PDF
+    </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered custom-table">
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>CIN</th>
+          <th>Email</th>
+          <th>Total Hours</th>
+          <th>Absences</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let worker of reportData">
+          <td><img [src]="getImageUrl(worker.photo)" alt="photo" class="worker-photo" *ngIf="worker.photo"></td>
+          <td>{{ worker.First_Name }}</td>
+          <td>{{ worker.Last_Name }}</td>
+          <td>{{ worker.CIN }}</td>
+          <td>{{ worker.E_mail }}</td>
+          <td>{{ worker.total_hours }}</td>
+          <td>{{ worker.nombre_absences }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

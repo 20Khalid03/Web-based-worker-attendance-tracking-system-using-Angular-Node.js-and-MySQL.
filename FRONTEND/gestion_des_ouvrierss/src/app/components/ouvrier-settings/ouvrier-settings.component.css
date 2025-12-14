@@ -1,0 +1,110 @@
+.ouvrier-profile-card {
+    background-color: #f8f9fa; /* Couleur de fond douce */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    transition: transform 0.2s; /* Effet de survol */
+  }
+  
+  .ouvrier-profile-card:hover {
+    transform: translateY(-5px); /* Élément qui remonte légèrement au survol */
+  }
+  
+  .profile-header {
+    background-color: #4CAF50; /* Couleur du header */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-top-left-radius: 15px; /* Coins arrondis */
+    border-top-right-radius: 15px;
+  }
+  
+  .profile-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .profile-content {
+    display: flex;
+    padding: 30px;
+  }
+  
+  .profile-image {
+    flex: 0 0 150px; /* Réduire la taille de l'image */
+    margin-right: 20px;
+  }
+  
+  .profile-image img {
+    width: 100%;
+    height: auto; /* Rendre l'image réactive */
+    object-fit: cover;
+    border: 5px solid #4CAF50; /* Couleur de la bordure */
+    border-radius: 10px; /* Coins arrondis */
+  }
+  
+  .profile-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrer le contenu verticalement */
+  }
+  
+  .profile-details h3 {
+    color: #333;
+    font-size: 26px; /* Légèrement plus petit pour un look moderne */
+    margin-bottom: 15px;
+  }
+  
+  .profile-info-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .profile-info-list li {
+    margin-bottom: 10px; /* Espacement réduit */
+    font-size: 16px;
+    color: #555;
+    display: flex;
+    align-items: center; /* Aligner les icônes */
+  }
+  
+  .profile-info-list i {
+    margin-right: 10px;
+    color: #4CAF50; /* Couleur des icônes */
+  }
+  
+  .btn-primary {
+    background-color: #007bff; /* Couleur moderne pour le bouton */
+    border: none;
+    border-radius: 5px; /* Coins arrondis */
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Couleur au survol */
+  }
+  
+  .btn-success {
+    background-color: #28a745; /* Couleur pour le bouton de succès */
+  }
+  
+  .btn-success:hover {
+    background-color: #218838; /* Couleur au survol */
+  }
+  
+  @media (max-width: 768px) {
+    .profile-content {
+      flex-direction: column;
+      align-items: center; /* Centrer le contenu */
+    }
+  
+    .profile-image {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+  

@@ -1,0 +1,56 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <a class="navbar-brand" href="#">
+      <img src="assets/agri_logo.png" alt="Logo" class="navbar-logo">
+    </a>
+    <div class="navbar-user-info">
+      <span class="navbar-welcome-emoji">👋</span>
+      <span class="navbar-welcome-text">Bienvenue, {{ userName }}</span>
+      <a href="#" class="navbar-message-icon" title="Messages">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="absent-list-container">
+  <h1 class="absent-list-title">Liste des Absents</h1>
+  
+  <div class="absent-list-search">
+    <label for="searchDate" class="absent-list-search-label">Sélectionnez une date :</label>
+    <input 
+      type="date" 
+      id="searchDate"
+      [formControl]="dateSearch" 
+      name="searchDate" 
+      class="absent-list-search-input" 
+      aria-label="Search"
+    >
+  </div>
+
+  <div *ngIf="absents.length === 0" class="absent-list-empty">
+    <i class="fas fa-calendar-times absent-list-empty-icon"></i>
+    <p>Aucun absent pour la date sélectionnée</p>
+  </div>
+
+  <div *ngIf="absents.length > 0" class="absent-list-table-container">
+    <table class="absent-list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Prénom</th>
+          <th>Nom</th>
+          <th>Date d'absence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let absent of absents">
+          <td>{{ absent.id }}</td>
+          <td>{{ absent.firstName }}</td>
+          <td>{{ absent.lastName }}</td>
+          <td>{{ absent.absenceDate | date: 'dd/MM/yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

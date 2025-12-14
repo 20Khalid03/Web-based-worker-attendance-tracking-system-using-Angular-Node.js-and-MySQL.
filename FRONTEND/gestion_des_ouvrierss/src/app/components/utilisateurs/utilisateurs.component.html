@@ -1,0 +1,145 @@
+
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <img src="assets/agri_logo.png" alt="Logo" class="img-fluid" style="max-height: 100px;">
+    </a>
+
+    <!-- Icônes de messagerie et utilisateur -->
+    <div class="d-flex align-items-center">
+      <a href="#" class="text-decoration-none me-3">
+        <i class="fa fa-envelope fa-lg"></i>
+      </a>
+      <span class="me-2" style="font-size: 1.5rem;">👋</span>
+      <span class="navbar-text">Welcome, {{ userName }}!</span>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <h2 class="text-center mt-5">User Management System</h2>
+
+  <!-- Messages d'erreur et de succès -->
+  <div *ngIf="showAlert" class="alert" [ngClass]="{'alert-danger': alertType === 'danger', 'alert-success': alertType === 'success'}" role="alert">
+    {{ alertMessage }}
+  </div>
+
+  <!-- Add user button -->
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-outline-success mb-3" type="button" data-bs-toggle="modal" data-bs-target="#addUser">Add User</button>
+  </div>
+
+  <div class="mb-3">
+    <label for="search" class="form-label">Search by First Name:</label>
+    <input class="form-control" type="text" id="search" placeholder="Enter first name..." [(ngModel)]="searchText" (input)="filterUtilisateurs()">
+  </div>
+
+  <!-- User table -->
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Login</th>
+        <th scope="col">Email</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let utilisateur of filteredUtilisateurs">
+        <td>{{ utilisateur.First_Name }}</td>
+        <td>{{ utilisateur.Last_Name }}</td>
+        <td>{{ utilisateur.login }}</td>
+        <td>{{ utilisateur.E_mail }}</td>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editUser" (click)="editUtilisateur(utilisateur)">Edit</button>
+            <button type="button" class="btn btn-outline-danger me-2" (click)="deleteUtilisateur(utilisateur.id)">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Add user modal -->
+  <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header modal-header-green">
+          <h5 class="modal-title" id="addUserLabel">Add New User</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="utilisateurDetail">
+            <div class="mb-3">
+              <label for="add_login" class="form-label">Login</label>
+              <input type="text" formControlName="login" class="form-control" id="add_login">
+            </div>
+            <div class="mb-3">
+              <label for="add_password" class="form-label">Password</label>
+              <input type="password" formControlName="password" class="form-control" id="add_password">
+            </div>
+            <div class="mb-3">
+              <label for="add_first_name" class="form-label">First Name</label>
+              <input type="text" formControlName="First_Name" class="form-control" id="add_first_name">
+            </div>
+            <div class="mb-3">
+              <label for="add_last_name" class="form-label">Last Name</label>
+              <input type="text" formControlName="Last_Name" class="form-control" id="add_last_name">
+            </div>
+            <div class="mb-3">
+              <label for="add_email" class="form-label">Email</label>
+              <input type="email" formControlName="E_mail" class="form-control" id="add_email">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="addUtilisateur()">Add User</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit user modal -->
+  <div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header modal-header-green">
+          <h5 class="modal-title" id="editUserLabel">Edit User</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="utilisateurDetail">
+            <div class="mb-3">
+              <label for="edit_login" class="form-label">Login</label>
+              <input type="text" formControlName="login" class="form-control" id="edit_login">
+            </div>
+            <div class="mb-3">
+              <label for="edit_password" class="form-label">Password</label>
+              <input type="password" formControlName="password" class="form-control" id="edit_password">
+            </div>
+            <div class="mb-3">
+              <label for="edit_first_name" class="form-label">First Name</label>
+              <input type="text" formControlName="First_Name" class="form-control" id="edit_first_name">
+            </div>
+            <div class="mb-3">
+              <label for="edit_last_name" class="form-label">Last Name</label>
+              <input type="text" formControlName="Last_Name" class="form-control" id="edit_last_name">
+            </div>
+            <div class="mb-3">
+              <label for="edit_email" class="form-label">Email</label>
+              <input type="email" formControlName="E_mail" class="form-control" id="edit_email">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="updateUtilisateur()">Update User</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

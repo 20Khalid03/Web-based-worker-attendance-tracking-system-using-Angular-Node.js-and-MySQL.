@@ -1,0 +1,174 @@
+<div id="tous" class="container-fluid p-0">
+  
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="assets/agri_logo.png" alt="Logo" class="img-fluid" style="max-height: 100px;">
+      </a>
+      <app-custom-alert
+      [message]="alertMessage"
+      [show]="showAlert"
+      [type]="alertType"
+      (onClose)="closeAlert()"
+    ></app-custom-alert>
+      <!-- Icônes de messagerie et utilisateur -->
+      <div class="d-flex align-items-center">
+        <a href="#" class="text-decoration-none me-3">
+          <i class="fa fa-envelope fa-lg"></i>
+        </a>
+        <span class="me-2" style="font-size: 1.5rem;">👋</span>
+        <span class="navbar-text">Welcome, {{ userName }}!</span>
+      </div>
+    </div>
+  </nav>
+    
+  <div class="content">
+    <div class="container-fluid">
+      <h2 class="text-center mt-5">Employee Management System</h2>
+
+      <!-- Add employee button -->
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-outline-success mb-3" type="button" data-bs-toggle="modal" data-bs-target="#addEmployee">Add Employee</button>
+      </div>
+
+      <!-- Employee Search -->
+      <div class="mb-3">
+        <label for="search" class="form-label">Search by First Name:</label>
+        <input class="form-control" type="text" id="search" placeholder="Enter first name..." [(ngModel)]="searchText" (input)="filterOuvriers()">
+      </div>
+
+      <!-- Employee table -->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Employee's picture</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">CIN</th>
+            <th scope="col">Telephone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ouvrier of filteredOuvriers">
+            <td>
+              <img *ngIf="ouvrier.photo" [src]="getImageUrl(ouvrier.photo)" alt="Photo" class="img-thumbnail" style="width: 100px;">
+            </td>
+            <td>{{ ouvrier.First_Name }}</td>
+            <td>{{ ouvrier.Last_Name }}</td>
+            <td>{{ ouvrier.CIN }}</td>
+            <td>{{ ouvrier.telephone }}</td>
+            <td>{{ ouvrier.E_mail }}</td>
+            <td>{{ ouvrier.date_de_naissance | date:'dd/MM/yyyy' }}</td>
+            <td>
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editEmployee" (click)="editOuvrier(ouvrier)">Edit</button>
+                <button type="button" class="btn btn-outline-danger me-2" (click)="deleteOuvrier(ouvrier.id)">Delete</button>
+                <a [routerLink]="['/profile', ouvrier.id]" class="btn btn-outline-success">View Profile</a>            
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Add employee modal -->
+  <div class="modal fade" id="addEmployee"  #addEmployeeModal tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header modal-header-green">
+          <h5 class="modal-title" id="exampleModalLabel">Add new Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="ouvrierDetail">
+            <div class="mb-3">
+              <label for="First_Name" class="form-label">First Name</label>
+              <input type="text" formControlName="First_Name" class="form-control" id="First_Name">
+            </div>
+            <div class="mb-3">
+              <label for="Last_Name" class="form-label">Last Name</label>
+              <input type="text" formControlName="Last_Name" class="form-control" id="Last_Name">
+            </div>
+            <div class="mb-3">
+              <label for="CIN" class="form-label">CIN</label>
+              <input type="text" formControlName="CIN" class="form-control" id="CIN">
+            </div>
+            <div class="mb-3">
+              <label for="telephone" class="form-label">Telephone</label>
+              <input type="text" formControlName="telephone" class="form-control" id="telephone">
+            </div>
+            <div class="mb-3">
+              <label for="E_mail" class="form-label">Email</label>
+              <input type="email" formControlName="E_mail" class="form-control" id="E_mail">
+            </div>
+            <div class="mb-3">
+              <label for="date_de_naissance" class="form-label">Date of Birth</label>
+              <input type="date" formControlName="date_de_naissance" class="form-control" id="date_de_naissance">
+            </div>
+            <div class="mb-3">
+              <label for="photo" class="form-label">Photo</label>
+              <input type="file" id="photo" (change)="onFileChange($event)">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="checkOuvrierExists()">Add Employee</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit employee modal -->
+  <div class="modal fade" id="editEmployee" #editEmployeeModal tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header modal-header-blue">
+          <h5 class="modal-title" id="editModalLabel">Edit Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="ouvrierDetail">
+            <div class="mb-3">
+              <label for="editFirst_Name" class="form-label">First Name</label>
+              <input type="text" formControlName="First_Name" class="form-control" id="editFirst_Name">
+            </div>
+            <div class="mb-3">
+              <label for="editLast_Name" class="form-label">Last Name</label>
+              <input type="text" formControlName="Last_Name" class="form-control" id="editLast_Name">
+            </div>
+            <div class="mb-3">
+              <label for="editCIN" class="form-label">CIN</label>
+              <input type="text" formControlName="CIN" class="form-control" id="editCIN">
+            </div>
+            <div class="mb-3">
+              <label for="editTelephone" class="form-label">Telephone</label>
+              <input type="text" formControlName="telephone" class="form-control" id="editTelephone">
+            </div>
+            <div class="mb-3">
+              <label for="editE_mail" class="form-label">Email</label>
+              <input type="email" formControlName="E_mail" class="form-control" id="editE_mail">
+            </div>
+            <div class="mb-3">
+              <label for="editDate_de_naissance" class="form-label">Date of Birth</label>
+              <input type="date" formControlName="date_de_naissance" class="form-control" id="editDate_de_naissance">
+            </div>
+            <div class="mb-3">
+              <label for="editPhoto" class="form-label">Photo</label>
+              <input type="file" id="editPhoto" (change)="onFileChange($event)">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="updateOuvrier()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+/* Global styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Navbar styles */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  padding: 15px 0;
+}
+
+.logo {
+  max-height: 60px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.message-icon {
+  color: #28a745;
+  transition: color 0.3s ease;
+}
+
+.message-icon:hover {
+  color: #218838;
+}
+
+.welcome-emoji {
+  font-size: 1.5rem;
+}
+
+.welcome-text {
+  font-weight: 500;
+  color: #28a745;
+}
+
+/* Container styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Heading styles */
+h2 {
+  color: #28a745;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Chart card styles */
+.chart-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Chart container styles */
+canvas {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 400px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chart-card {
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Animation for chart cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.chart-card {
+  animation: fadeInUp 0.5s ease-out forwards;
+}

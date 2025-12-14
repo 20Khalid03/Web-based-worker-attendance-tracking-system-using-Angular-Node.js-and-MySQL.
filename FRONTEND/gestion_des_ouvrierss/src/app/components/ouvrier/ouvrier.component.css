@@ -1,0 +1,200 @@
+/* Background et Conteneur */
+#tous {
+  min-height: 100vh; 
+  padding-top: 100px; 
+  position: relative;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #fff; /* Dark green for navbar */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.navbar-brand img {
+  height: 80px;
+}
+
+.navbar .navbar-text {
+  color: black;
+  font-weight: bold;
+}
+
+/* Recherche */
+#search {
+  width: 60%;
+  padding: 12px 20px;
+  border-radius: 50px; /* Rounded edges */
+  border: 2px solid #34AF6D;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for a floating effect */
+  font-size: 16px;
+  transition: all 0.3s ease; /* Smooth transitions */
+}
+
+#search:focus {
+  border-color: #1e7e34;
+  box-shadow: 0 0 10px rgba(0, 150, 0, 0.2);
+}
+
+/* Tableau des employés */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like feel */
+  margin-bottom: 20px;
+}
+
+.table th, .table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #004d40;
+  color: white;
+  text-transform: uppercase; /* Bold uppercase for header */
+  font-size: 14px;
+}
+
+.table td {
+  background-color: #f8f9fa; /* Soft background for rows */
+  font-size: 14px;
+}
+
+.table tbody tr:hover {
+  background-color: #d7ffd9; /* Highlight on hover */
+}
+
+/* Boutons d'action */
+.btn-group .btn {
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 30px; /* Rounded buttons */
+  transition: background-color 0.3s ease;
+}
+
+.btn-outline-primary {
+  border-color: #1e7e34;
+  color: #1e7e34;
+}
+
+.btn-outline-primary:hover {
+  background-color: #1e7e34;
+  color: white;
+}
+
+.btn-outline-danger {
+  border-color: #d32f2f;
+  color: #d32f2f;
+}
+
+.btn-outline-danger:hover {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.btn-outline-success {
+  border-color: #388e3c;
+  color: #388e3c;
+}
+
+.btn-outline-success:hover {
+  background-color: #388e3c;
+  color: white;
+}
+
+/* Bouton ajouter employé */
+.btn-outline-success {
+  background-color: #004d40;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px; /* Rounded edges for buttons */
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-success:hover {
+  background-color: #388e3c;
+}
+
+/* Modals */
+.modal-header-green {
+  background-color: #004d40;
+  color: white;
+  border-bottom: none;
+}
+
+.modal-header-blue {
+  background-color: #0288d1;
+  color: white;
+  border-bottom: none;
+}
+
+.modal-content {
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.modal-footer .btn {
+  border-radius: 30px;
+}
+
+/* Ombre sur images */
+.img-thumbnail {
+  border: none;
+  border-radius: 15px; /* Rounded images */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Ajout de styles pour boutons et champs dans le modal */
+.form-control {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #757575;
+  cursor: pointer;
+}
+
+.btn-close:hover {
+  color: #d32f2f;
+}
+
+/* Footer Modal Boutons */
+.modal-footer .btn-secondary {
+  background-color: #757575;
+  color: white;
+  border-radius: 30px;
+}
+
+.modal-footer .btn-primary {
+  background-color: #004d40;
+  border-radius: 30px;
+  color: white;
+}
+
+/* Footer spacing fix */
+.modal-footer {
+  justify-content: space-between;
+}
+
+/* Bouton Réinitialiser */
+button.btn-secondary {
+  background-color: #00796b;
+  border-radius: 30px;
+  color: white;
+  font-weight: bold;
+}
+
+button.btn-secondary:hover {
+  background-color: #004d40;
+}

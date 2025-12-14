@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="wrapper">
+    <aside id="sidebar">
+      <div class="d-flex">
+        <button class="toggle-btn" type="button">
+          <i class="lni lni-grid-alt"></i>
+        </button>
+      </div>
+  <br><br>
+      <ul class="sidebar-nav">
+        <li class="sidebar-item">
+          <a routerLink="/ouvrier" class="sidebar-link">
+            <i class="lni lni-user"></i>
+            <span>Espace Ouvriers</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a routerLink="/utilisateurs" class="sidebar-link">
+            <i class="fas fa-users"></i>
+            <span>Espace Utilisateurs</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+             data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+            <i class="lni lni-protection"></i>
+            <span>Evaluation</span>
+          </a>
+          <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+            <li class="sidebar-item">
+              <a routerLink="/Absence-List" class="sidebar-link">Listes des Absents</a>
+            </li>
+            <li class="sidebar-item">
+              <a routerLink="/worker-report" class="sidebar-link">Repport</a>
+            </li>
+          </ul>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+             data-bs-target="#visualisation" aria-expanded="false" aria-controls="visualisation">
+             <i class="fas fa-chart-bar"></i>
+             <span>Visualisation</span>
+          </a>
+          <ul id="visualisation" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+            <li class="sidebar-item">
+              <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
+                 data-bs-target="#visualisation-links" aria-expanded="false" aria-controls="visualisation-links">
+                Graphiques
+              </a>
+              <ul id="visualisation-links" class="sidebar-dropdown list-unstyled collapse">
+                <li class="sidebar-item">
+                  <a routerLink="/app-visualisation" class="sidebar-link">Graphiques en Barres et Lignes</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="sidebar-item">
+          <a routerLink="/profile" class="sidebar-link">
+            <i class="fas fa-clock"></i>
+            <span>Pointage</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a routerLink="/user-settings" class="sidebar-link">
+            <i class="lni lni-cog"></i>
+            <span>Setting</span>
+          </a>
+        </li>
+      </ul><br><br><br><br><br><br><br><br>
+      <div class="sidebar-footer">
+        <a (click)="logout()" class="sidebar-link">
+          <i class="lni lni-exit"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+  
+    <div class="main p-3">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg ">
+        <div class="container">
+          <!-- Logo -->
+          <a class="navbar-brand" href="#">
+            <img src="assets/agri_logo.png" alt="Logo" class="img-fluid" style="max-height: 100px;">
+          </a>
+    
+
+
+          <!-- Icônes de messagerie et utilisateur -->
+          <div class="d-flex align-items-center">
+            <a href="#" class="text-decoration-none me-3">
+              <i class="fa fa-envelope fa-lg"></i>
+            </a>
+            <span class="welcome-icon animated-icon">👋</span>
+            <span class="welcome-text">Bienvenue de nouveau {{ userName }} !</span>
+          </div>
+        </div>
+      </nav>
+
+      <!--periode  section des indicateurs -->
+<div class="container mt-4">
+  <h3>Sélectionner la période pour les indicateurs</h3>
+  <div class="row">
+    <div class="col-md-3">
+      <label for="startDate">Date de début:</label>
+      <input type="date" id="startDate" [(ngModel)]="startDate" class="form-control">
+    </div>
+    <div class="col-md-3">
+      <label for="endDate">Date de fin:</label>
+      <input type="date" id="endDate" [(ngModel)]="endDate" class="form-control">
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+      <button (click)="loadIndicators()" class="btn btn-primary">Afficher les indicateurs</button>
+    </div>
+  </div>
+</div>
+  <!-- Indicators -->
+<div class="container mt-4">
+  <h3>Indicateurs du Mois en Cours</h3>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-center indicator-card total-hours-worked">
+        <div class="card-body">
+          <h5 class="card-title">Total des Heures Travaillées</h5>
+          <p class="card-text">{{ totalHoursWorked.toFixed(2)  }} heures</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center indicator-card average-hours-worked">
+        <div class="card-body">
+          <h5 class="card-title">Heures Moyennes Travaillées</h5>
+          <p class="card-text">{{ avgHoursWorked.toFixed(2) }} heures</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center indicator-card days-worked">
+        <div class="card-body">
+          <h5 class="card-title">Nombre de Jours Travaillés</h5>
+          <p class="card-text">{{ totalDaysWorked }} jours</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+     <!-- Pointage Table -->
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Historique des Pointages</h3>
+    <form (ngSubmit)="searchByDate()" class="d-flex" style="width: 40%;">
+      <input type="date" [(ngModel)]="searchDate" name="searchDate" class="form-control" placeholder="Search by date" aria-label="Search">
+      <button type="submit" class="btn btn-success ms-2">Search</button>
+    </form>    
+  </div>
+  <div class="d-flex justify-content-between mb-3">
+    <button (click)="changeDate(-1)" class="btn btn-primary">Précédent</button>
+    <h4>{{ selectedDate | date:'fullDate' }}</h4>
+    <button (click)="changeDate(1)" class="btn btn-success">Suivant</button>
+  </div>
+  <!-- Nouveau bouton pour supprimer tous les pointages -->
+  <div class="d-flex justify-content-end mb-3">
+    <button (click)="deletePointagesOfToday()" class="btn btn-danger">Supprimer Tout</button>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Heure d'entrée</th>
+        <th>Heure de sortie</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pointage of pointagesParJour.get(selectedDateString)">
+        <td>{{ pointage.ouvrier?.First_Name || 'N/A' }}</td>
+        <td>{{ pointage.ouvrier?.Last_Name || 'N/A' }}</td>
+        <td>
+          <ng-container *ngIf="!pointage.isEditing; else editEntry">
+            {{ pointage.date_heure_entree | date:'shortTime' }}
+          </ng-container>
+          <ng-template #editEntry>
+            <input type="time" [(ngModel)]="pointage.editedDateHeureEntree" />
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="!pointage.isEditing; else editExit">
+            {{ pointage.date_heure_sortie ? (pointage.date_heure_sortie | date:'shortTime') : 'En cours' }}
+          </ng-container>
+          <ng-template #editExit>
+            <input type="time" [(ngModel)]="pointage.editedDateHeureSortie" />
+          </ng-template>
+        </td>
+        <td>
+          <button *ngIf="!pointage.isEditing" (click)="editPointage(pointage)" class="btn btn-primary btn-sm me-2">
+            Edit
+          </button>
+          <button *ngIf="pointage.isEditing" (click)="savePointage(pointage)" class="btn btn-success btn-sm me-2">
+            Save
+          </button>
+          <button *ngIf="pointage.isEditing" (click)="cancelEdit(pointage)" class="btn btn-secondary btn-sm me-2">
+            Cancel
+          </button>
+          <button (click)="deletePointage(pointage.id)" class="btn btn-success btn-sm">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  
+    </div>
+  </div>

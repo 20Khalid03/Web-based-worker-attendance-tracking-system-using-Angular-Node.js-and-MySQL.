@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="assets/agri_logo.png" alt="Logo" class="img-fluid logo">
+    </a>
+    <div class="d-flex align-items-center">
+      <a href="#" class="text-decoration-none me-3 message-icon">
+        <i class="fas fa-envelope fa-lg"></i>
+      </a>
+      <span class="me-2 welcome-emoji">👋</span>
+      <span class="navbar-text welcome-text">Welcome, {{ userName }}!</span>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Graphiques des Heures Travaillées</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="chart-card">
+        <h3>Heures Travaillées (Barres)</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="chart-card">
+        <h3>Top 10 Ouvriers (Camembert)</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

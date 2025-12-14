@@ -1,0 +1,276 @@
+/* Enhanced Dashboard and Sidebar Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f7fa;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#sidebar {
+  width: 250px;
+  min-width: 250px;
+  background-color: #082C18;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  z-index: 1000;
+}
+@keyframes wave {
+  0%, 20%, 50%, 80%, 100% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(15deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  40% {
+    transform: rotate(5deg);
+  }
+}
+
+.animated-icon {
+  display: inline-block;
+  animation: wave 1.5s ease-in-out infinite;
+}
+
+#sidebar.collapsed {
+  width: 80px;
+  min-width: 80px;
+}
+
+.sidebar-logo {
+  padding: 20px;
+  text-align: center;
+}
+
+.sidebar-logo img {
+  max-width: 120px;
+  height: auto;
+}
+
+.sidebar-nav {
+  padding: 20px 0;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.sidebar-link i {
+  font-size: 18px;
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar-link span {
+  transition: opacity 0.3s ease-in-out;
+}
+
+#sidebar.collapsed .sidebar-link span {
+  opacity: 0;
+  visibility: hidden;
+  width: 0;
+}
+
+.sidebar-dropdown {
+  padding-left: 30px;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease-in-out;
+  overflow-y: auto;
+}
+
+.main.expanded {
+  margin-left: 80px;
+}
+
+.navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand img {
+  max-height: 40px;
+}
+
+.welcome-text {
+  font-size: 1rem;
+  color: #082C18;
+  font-weight: 500;
+}
+
+.welcome-icon {
+  font-size: 1.5rem;
+  color: #082C18;
+  margin-right: 10px;
+  animation: wave 2s infinite;
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  color: #082C18;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  background-color: #082C18;
+  border-color: #082C18;
+}
+
+.btn-primary:hover {
+  background-color: #0a3d20;
+  border-color: #0a3d20;
+}
+
+.indicator-card {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.indicator-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.total-hours-worked {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.average-hours-worked {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.days-worked {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+thead th {
+  background-color: #f4f7fa;
+  color: #082C18;
+  font-weight: 600;
+  padding: 12px;
+  text-align: left;
+}
+
+tbody tr {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+td {
+  padding: 12px;
+  vertical-align: middle;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    width: 80px;
+    min-width: 80px;
+  }
+
+  .main {
+    margin-left: 80px;
+  }
+
+  .sidebar-link span {
+    display: none;
+  }
+
+  .sidebar-dropdown {
+    position: absolute;
+    left: 80px;
+    top: 0;
+    background-color: #082C18;
+    min-width: 200px;
+    display: none;
+  }
+
+  #sidebar:hover .sidebar-dropdown {
+    display: block;
+  }
+
+  .navbar {
+    justify-content: center;
+  }
+
+  .container {
+    padding: 10px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+}

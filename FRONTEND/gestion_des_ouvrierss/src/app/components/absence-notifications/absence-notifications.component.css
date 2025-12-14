@@ -1,0 +1,27 @@
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .notification {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #721c24;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    max-width: 300px;
+  }
+  
+  .notification h3 {
+    margin-top: 0;
+    font-size: 18px;
+  }
+  
+  .notification p {
+    margin-bottom: 0;
+    font-size: 14px;
+  }

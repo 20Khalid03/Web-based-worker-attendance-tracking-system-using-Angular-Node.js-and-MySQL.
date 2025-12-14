@@ -1,0 +1,54 @@
+<div class="container mt-5" *ngIf="ouvrier">
+    <div class="ouvrier-profile-card">
+      <div class="profile-header">
+        <h2>Profil de l'ouvrier</h2>
+      </div>
+      <div class="profile-content">
+        <div class="profile-image">
+          <img [src]="getImageUrl(ouvrier.photo)" alt="Photo de l'ouvrier" class="rounded-circle">
+        </div>
+        <div class="profile-details">
+          <h3>{{ ouvrier.First_Name }} {{ ouvrier.Last_Name }}</h3>
+          <ul class="profile-info-list">
+            <li><i class="fas fa-id-card"></i> <strong>CIN:</strong> {{ ouvrier.CIN }}</li>
+            <li><i class="fas fa-phone"></i> <strong>Téléphone:</strong> {{ ouvrier.telephone }}</li>
+            <li><i class="fas fa-envelope"></i> <strong>Email:</strong> {{ ouvrier.E_mail }}</li>
+            <li><i class="fas fa-birthday-cake"></i> <strong>Date de naissance:</strong> {{ ouvrier.date_de_naissance | date:'dd/MM/yyyy' }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <button (click)="isEditing = !isEditing" class="btn btn-primary mt-3">{{ isEditing ? 'Annuler' : 'Modifier' }}</button>
+  
+    <div *ngIf="isEditing" class="mt-3">
+      <form [formGroup]="credentialsForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="currentPassword">Mot de passe actuel</label>
+          <input type="password" formControlName="currentPassword" class="form-control" id="currentPassword" required>
+        </div>
+        <div class="form-group">
+          <label for="newLogin">Nouveau login</label>
+          <input type="text" formControlName="newLogin" class="form-control" id="newLogin">
+        </div>
+        <div class="form-group">
+          <label for="newPassword">Nouveau mot de passe</label>
+          <input type="password" formControlName="newPassword" class="form-control" id="newPassword">
+        </div>
+        <button type="submit" class="btn btn-success">Mettre à jour</button>
+      </form>
+    </div>
+  
+    <app-custom-alert
+      [message]="successMessage"
+      [show]="!!successMessage"
+      type="success"
+      (onClose)="successMessage = ''"></app-custom-alert>
+    
+    <app-custom-alert
+      [message]="errorMessage"
+      [show]="!!errorMessage"
+      type="danger"
+      (onClose)="errorMessage = ''"></app-custom-alert>
+  </div>
+  

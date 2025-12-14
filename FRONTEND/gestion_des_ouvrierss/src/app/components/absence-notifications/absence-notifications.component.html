@@ -1,0 +1,8 @@
+<div class="notification-container" *ngIf="latestNotification">
+    <div class="notification">
+      <h3>{{ latestNotification.title }}</h3>
+      <p>{{ latestNotification.message }}</p>
+      <button (click)="clearNotification()">Fermer</button>
+    </div>
+  </div>
+  
