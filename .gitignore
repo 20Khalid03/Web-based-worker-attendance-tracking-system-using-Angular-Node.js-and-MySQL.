@@ -5,6 +5,7 @@ BACKEND/node_modules/
 
 # Environment variables
 .env
+BACKEND/uploads/
 
 # Build folders
 dist/
